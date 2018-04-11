@@ -1,0 +1,34 @@
+#!/usr/bin/env python3 # <---- This runs the code
+'''
+Super Sketch Experimental Drive that no team should attempt to recreate
+'''
+
+
+import wpilib
+import wpilib.buttons
+from wpilib.drive import DifferentialDrive
+
+class MyRobot(wpilib.IterativeRobot):
+
+    def robotInit(self):
+
+        self.LeftMec = wpilib.Talon(0)
+        self.RightMec = wpilib.Talon(1)
+        self.pg = wpilib.Talon(2)
+        self.xboxController = wpilib.XboxController(0)# <-- This is for using Xbox controllers
+
+    def autonomousInit(self):
+        pass
+
+    def autonomousPeriodic(self):
+        pass
+
+    def teleopInit(self):
+        pass
+
+    def teleopPeriodic(self):
+        self.LeftMec.set(self.xboxController.getY(0))
+        self.RightMec.set(-1 * self.xboxController.getY(0))
+        self.pg.set(0.075 * self.xboxController.getX(1))
+if __name__ == "__main__":
+    wpilib.run(MyRobot)
