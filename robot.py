@@ -14,6 +14,7 @@ class MyRobot(wpilib.IterativeRobot):
 
         self.LeftMec = wpilib.Talon(0)
         self.RightMec = wpilib.Talon(1)
+        self.robotDrive = wpilib.RobotDrive(self.LeftMec, self.RightMec)
         self.pg = wpilib.Talon(2)
         self.xboxController = wpilib.XboxController(0)# <-- This is for using Xbox controllers
 
@@ -27,8 +28,9 @@ class MyRobot(wpilib.IterativeRobot):
         pass
 
     def teleopPeriodic(self):
-        self.LeftMec.set(self.xboxController.getY(0))
-        self.RightMec.set(-1 * self.xboxController.getY(0))
+#        self.LeftMec.set(self.xboxController.getY(0))
+ #       self.RightMec.set(-1 * self.xboxController.getY(0))
         self.pg.set(0.075 * self.xboxController.getX(1))
+        self.robotDrive.arcadeDrive(self.xboxController.getY(0),self.xboxController.getX(0))
 if __name__ == "__main__":
     wpilib.run(MyRobot)
